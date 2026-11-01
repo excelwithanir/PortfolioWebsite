@@ -1,0 +1,1039 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Anirban - Portfolio Website</title>
+
+    <!-- Connect external CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Tools & Analytics Services Styles -->
+    <style>
+        .services-section {
+            background: #0b1020;
+            color: #ffffff;
+            padding: 30px 0 24px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .services-container {
+            width: 90%;
+            max-width: 1240px;
+            margin: 0 auto;
+        }
+
+        .services-heading {
+            text-align: center;
+            margin-bottom: 42px;
+        }
+
+        .services-heading h2 {
+            color: #70a7ff;
+            font-size: clamp(25px, 3vw, 38px);
+            font-weight: 800;
+            line-height: 1.2;
+            margin: 0 0 12px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(6, minmax(0, 1fr));
+            gap: 16px;
+            align-items: stretch;
+        }
+
+        .service-card {
+            background: #121a2e;
+            border: 1px solid #293751;
+            border-radius: 18px;
+            padding: 22px 16px 20px;
+            min-width: 0;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            transition: border-color 0.2s ease,
+                        background 0.2s ease,
+                        transform 0.2s ease;
+        }
+
+        .service-card:hover {
+            border-color: #70a7ff;
+            background: #18243b;
+            transform: translateY(-3px);
+        }
+
+        .service-card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            min-height: 28px;
+            margin-bottom: 20px;
+        }
+
+        .service-icon {
+            font-size: 23px;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        .service-category {
+            display: inline-block;
+            font-size: 10px;
+            line-height: 1.4;
+            font-weight: 700;
+            text-align: center;
+            padding: 4px 6px;
+            border-radius: 4px;
+        }
+
+        .category-blue {
+            color: #70a7ff;
+            background: #20365e;
+        }
+
+        .category-green {
+            color: #49f0c0;
+            background: #103d3a;
+        }
+
+        .category-yellow {
+            color: #ffd34d;
+            background: #41351e;
+        }
+
+        .category-purple {
+            color: #c9a5ff;
+            background: #342650;
+        }
+
+        .category-red {
+            color: #ff8b9a;
+            background: #412438;
+        }
+
+        .category-cyan {
+            color: #70e6ff;
+            background: #153743;
+        }
+
+        .category-orange {
+            color: #ffb477;
+            background: #402c20;
+        }
+
+        .service-card h3 {
+            color: #ffffff;
+            font-size: 19px;
+            font-weight: 700;
+            line-height: 1.25;
+            margin: 0 0 8px;
+        }
+
+        .service-card p {
+            color: #9dbef7;
+            font-size: 12px;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* Center the My Projects heading */
+        #projects > .container > h2 {
+            text-align: center;
+        }
+
+        /* GET IN TOUCH SECTION */
+        .contact-section {
+            background: #0b1020;
+            color: #eef3ff;
+            padding: 65px 0 55px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .contact-container {
+            width: 90%;
+            max-width: 1210px;
+            margin: 0 auto;
+        }
+
+        .contact-heading {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .contact-eyebrow {
+            color: #70a7ff;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            margin-bottom: 8px;
+        }
+
+        .contact-heading h2 {
+            color: #ffffff;
+            font-size: clamp(30px, 4vw, 40px);
+            line-height: 1.2;
+            margin: 0 0 12px;
+        }
+
+        .contact-heading p {
+            color: #9dbef7;
+            font-size: 16px;
+            line-height: 1.6;
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        /* Three contact cards aligned side by side */
+        .contact-layout {
+            display: block;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            align-items: stretch;
+        }
+
+        .contact-info-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px;
+            background: #121a2e;
+            border: 1px solid #26324d;
+            border-radius: 16px;
+            min-height: 90px;
+            height: 100%;
+            box-sizing: border-box;
+        }
+
+        .contact-info-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: #1b2b4b;
+            font-size: 22px;
+        }
+
+        .contact-info-card:nth-child(2) .contact-info-icon {
+            background: #103d3a;
+        }
+
+        .contact-info-card:nth-child(3) .contact-info-icon {
+            background: #342650;
+        }
+
+        .contact-info-text {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .contact-info-text h3 {
+            color: #ffffff;
+            font-size: 15px;
+            line-height: 1.4;
+            margin: 0 0 4px;
+        }
+
+        .contact-info-text p,
+        .contact-info-text a {
+            color: #9dbef7;
+            font-size: 14px;
+            line-height: 1.5;
+            margin: 0;
+            overflow-wrap: anywhere;
+        }
+
+        .contact-info-text a:hover {
+            color: #70a7ff;
+        }
+
+        /* Professional profile links */
+        .professional-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .professional-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 10px;
+            background: #1b2b4b;
+            border: 1px solid #30466b;
+            border-radius: 8px;
+            color: #c5d7ff;
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 1.4;
+            text-decoration: none;
+            transition: background 0.2s ease,
+                        border-color 0.2s ease,
+                        color 0.2s ease;
+        }
+
+        .professional-links a:hover {
+            background: #20365e;
+            border-color: #70a7ff;
+            color: #ffffff;
+        }
+
+        /* GitHub repository dropdown */
+        .repository-dropdown {
+            position: relative;
+            display: inline-block;
+            margin-top: 12px;
+        }
+
+        .repository-dropdown summary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            min-width: 145px;
+            padding: 9px 12px;
+            background: #1b2b4b;
+            border: 1px solid #30466b;
+            border-radius: 8px;
+            color: #c5d7ff;
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 1.4;
+            cursor: pointer;
+            list-style: none;
+        }
+
+        .repository-dropdown summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .repository-dropdown summary::after {
+            content: "▾";
+            font-size: 13px;
+        }
+
+        .repository-dropdown[open] summary {
+            border-color: #70a7ff;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .repository-dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 10;
+            min-width: 100%;
+            box-sizing: border-box;
+            background: #121a2e;
+            border: 1px solid #30466b;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            overflow: hidden;
+        }
+
+        .repository-dropdown-menu a {
+            display: block;
+            padding: 10px 12px;
+            color: #c5d7ff;
+            font-size: 14px;
+            line-height: 1.4;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .repository-dropdown-menu a:hover {
+            background: #20365e;
+            color: #ffffff;
+        }
+
+        /* Clickable collaboration enquiry link */
+        .contact-inquiry {
+            text-align: center;
+            margin-top: 60px;
+            margin-bottom: 0;
+        }
+
+        .contact-inquiry a {
+            display: inline-block;
+            color: #c5d7ff;
+            font-size: 17px;
+            line-height: 1.6;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .contact-inquiry a:hover {
+            color: #70a7ff;
+            text-decoration: underline;
+        }
+
+        /* Responsive layouts */
+        @media (max-width: 1150px) {
+            .services-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 800px) {
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info-card {
+                height: auto;
+            }
+
+            .contact-inquiry {
+                margin-top: 40px;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .services-section {
+                padding-top: 24px;
+            }
+
+            .services-heading {
+                margin-bottom: 28px;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 12px;
+            }
+
+            .service-card {
+                padding: 17px 14px;
+            }
+
+            .service-card-top {
+                margin-bottom: 16px;
+            }
+
+            .contact-section {
+                padding: 48px 0 40px;
+            }
+
+            .contact-heading {
+                margin-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- ==============================
+         HEADER / NAVIGATION
+         ============================== -->
+
+    <header>
+
+        <div class="container nav">
+
+            <div class="logo">
+                <a href="index.html">Anirban Chowdhury</a>
+            </div>
+
+            <ul class="nav-links">
+
+                <li>
+                    <a href="#projects">MyProjects</a>
+                </li>
+
+                <li>
+                    <a href="older-projects.html">Older Projects</a>
+                </li>
+
+                <li>
+                    <a href="Blog.html" aria-current="page">Blog</a>
+                </li>
+                
+
+                <li>
+                    <a href="About%20Me.html">About Me</a>
+                </li>
+
+                <li>
+                    <a href="#contact">Contact</a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </header>
+
+
+    <!-- ==============================
+         HERO SECTION
+         ============================== -->
+
+    <section class="hero"
+        style="min-height: 0; height: auto; padding-top: 1rem; padding-bottom: 0; margin-bottom: 0;">
+
+        <div class="container">
+
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+                Hi! I'm
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#6ea8fe] via-sky-300 to-emerald-400">Anirban Chowdhury!</span>
+            </h1>
+
+            <p class="hero-professional-title">
+                | A Data Analyst | 
+            </p>
+
+            <p>
+                I help turn complex datasets into clear dashboards,
+                business reports and actionable insights.
+                Explore my projects to see my analytical work.
+                Go to About Me section to know more about me 😊😊😊😊
+            </p>
+
+            <!--
+            <button class="button" id="exploreButton">
+                Explore Projects
+            </button>
+            -->
+
+            <p id="exploreMessage"></p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==============================
+         TOOLS & ANALYTICS SERVICES
+         ============================== -->
+
+    <section class="services-section" id="services">
+
+        <div class="services-container">
+
+            <div class="services-heading">
+
+                <h2>
+                    Tools I Use(d) For Analysis
+                </h2>
+
+            </div>
+
+
+            <div class="services-grid">
+
+
+                <!-- Service 1: Python -->
+
+                <div class="service-card">
+
+                    <div class="service-card-top">
+
+                        <span class="service-icon">🐍</span>
+
+                        <span class="service-category category-blue">
+                            AUTOMATION &amp; EDA
+                        </span>
+
+                    </div>
+
+                    <h3>Python</h3>
+
+                    <p>
+                        pandas, openpyxl, data cleaning,
+                        exploratory data analysis and
+                        automated Excel reporting.
+                    </p>
+
+                </div>
+
+
+                <!-- Service 2: SQL -->
+
+                <div class="service-card">
+
+                    <div class="service-card-top">
+
+                        <span class="service-icon">🗄️</span>
+
+                        <span class="service-category category-green">
+                            DATA QUERYING
+                        </span>
+
+                    </div>
+
+                    <h3>SQL</h3>
+
+                    <p>
+                        CTEs, window functions, CASE expressions,
+                        AR ageing buckets, joins and
+                        healthcare claims analysis.
+                    </p>
+
+                </div>
+
+
+                <!-- Service 3: Excel -->
+
+                <div class="service-card">
+
+                    <div class="service-card-top">
+
+                        <span class="service-icon">📊</span>
+
+                        <span class="service-category category-yellow">
+                            DATA ANALYSIS
+                        </span>
+
+                    </div>
+
+                    <h3>Excel</h3>
+
+                    <p>
+                        PivotTables, XLOOKUP, KPI scorecards,
+                        data validation and automated
+                        reporting workflows.
+                    </p>
+
+                </div>
+
+
+                <!-- Service 4: Power BI -->
+
+                <div class="service-card">
+
+                    <div class="service-card-top">
+
+                        <span class="service-icon">⚡</span>
+
+                        <span class="service-category category-purple">
+                            VISUALS &amp; DASHBOARDS
+                        </span>
+
+                    </div>
+
+                    <h3>Power BI</h3>
+
+                    <p>
+                        DAX measures, star schema modelling,
+                        KPI dashboards, AR ageing and
+                        executive reporting.
+                    </p>
+
+                </div>
+
+
+                <!-- Service 5: Go -->
+
+                <div class="service-card">
+
+                    <div class="service-card-top">
+
+                        <span class="service-icon">🐹</span>
+
+                        <span class="service-category category-cyan">
+                            BACKENDs
+                        </span>
+
+                    </div>
+
+                    <h3>Go</h3>
+
+                    <p>
+                        Structs, methods, error handling,
+                        fundamentals, SQL integration
+                        and financial data processing.
+                    </p>
+
+                </div>
+
+
+                <!-- Service 6: DynamoDB Local -->
+
+                <div class="service-card">
+
+                    <div class="service-card-top">
+
+                        <span class="service-icon">🗃️</span>
+
+                        <span class="service-category category-orange">
+                            NoSQL DATABASE
+                        </span>
+
+                    </div>
+
+                    <h3>DynamoDB Local</h3>
+
+                    <p>
+                        Partition and sort keys, table design,
+                        Go SDK integration, CRUD operations
+                        and conditional updates.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==============================
+         PROJECTS SECTION
+         ============================== -->
+
+    <section class="projects" id="projects"
+        style="margin-top: 0; padding-top: 0;">
+
+        <div class="container">
+
+            <h2>
+                My Projects
+            </h2>
+
+            <div class="project-grid">
+
+
+                <!-- Project 1 -->
+
+                <div class="project-card">
+
+                    <img src="images/AR-Portfolio/ARDashboard.webp"
+                         alt="Accounts Receivable Analytics">
+
+                    <h3>
+                        Accounts Receivable Analytics
+                    </h3>
+
+                    <p>
+                        This project explores outstanding
+                        receivables, collections and AR analysis.
+                    </p>
+
+                    <a href="AR-Project.html" class="button">
+                        View Project
+                    </a>
+
+                </div>
+
+
+                <!-- Project 2 -->
+                
+                <div class="project-card">
+
+                    <img src="images/facility.webp"
+                         alt="Facility Management Analytics"s">
+
+                    <h3>
+                        Facility Management Analytics
+                    </h3>
+
+                    <p>
+                        This project explores outstanding
+                        receivables, payeables, collections in Facility Management.
+                        This is in progress, page will be 
+                        updated accordingly.
+                    </p>
+
+                    <a href="#" class="button">
+                        View Project
+                    </a>
+
+                </div>
+                
+
+                <!-- Project 3 -->
+
+                <div class="project-card">
+
+                    <h3>
+                        Healthcare RCM Analytics
+                    </h3>
+
+                    <p>
+                        This project explores healthcare
+                        revenue cycle management data.
+                        This is in progress, page will be 
+                        updated accordingly.
+                    </p>
+
+                    <a href="#" class="button">
+                        View Project
+                    </a>
+
+                </div>
+
+
+                <!-- Project 4 -->
+
+                <div class="project-card">
+
+                    <h3>
+                        Diabetes Management Analytics
+                    </h3>
+
+                    <p>
+                        This project explores healthcare
+                        data and analytical patterns.
+                        This is in progress, page will be 
+                        updated accordingly.
+                    </p>
+
+                    <a href="#" class="button">
+                        View Project
+                    </a>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+<!--
+        ==============================
+         PRACTICE VIDEO
+         ============================== 
+
+    <section class="projects">
+
+        <div class="container">
+
+            <h2>
+                Practice Video
+            </h2>
+
+            <p>
+                This video is included only for HTML video practice.
+            </p>
+
+            <video controls class="practice-video">
+
+                <source src="videos/PythonFormattinExcelFile.mp4"
+                        type="video/mp4">
+
+                Your browser does not support the video element.
+
+            </video>
+
+        </div>
+
+    </section>
+--> 
+  
+
+    <!-- ==============================
+         GET IN TOUCH / CONTACT SECTION
+         ============================== -->
+
+    <section class="contact-section" id="contact">
+
+        <div class="contact-container">
+
+            <div class="contact-heading">
+
+                <p class="contact-eyebrow">GET IN TOUCH</p>
+
+                <h2>Let's Connect!</h2>
+
+                <p>
+                    Looking for a Data Analyst or Business Intelligence
+                    collaborator to turn complex datasets into clear
+                    dashboards? Send a quick note or connect below.
+                </p>
+
+            </div>
+
+
+            <div class="contact-layout">
+
+
+                <!-- Contact Information Cards -->
+
+                <div class="contact-info">
+
+                    <div class="contact-info-card">
+
+                        <div class="contact-info-icon">📍</div>
+
+                        <div class="contact-info-text">
+
+                            <h3>Location</h3>
+
+                            <p>India (Open to Remote Assignments)</p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="contact-info-card">
+
+                        <div class="contact-info-icon">💼</div>
+
+                        <div class="contact-info-text">
+
+                            <h3>LinkedIn &amp; Professional Network</h3>
+
+                            <p>
+                                Let's connect and discuss data analytics
+                                and business intelligence opportunities.
+                            </p>
+
+                           <div class="professional-links">
+
+                                <a href="https://www.linkedin.com/in/anirban-chowdhury-99970392/"
+                                   target="_blank"
+                                   rel="noopener noreferrer">
+                                    🔗 LinkedIn:https://tinyurl.com/3w6sm6fd
+                                </a>
+                                
+
+                                <!-- Will be added later
+                                <a href="YOUR_KAGGLE_PROFILE_URL"
+                                   target="_blank"
+                                   rel="noopener noreferrer">
+                                    📊 Kaggle
+                                </a>
+
+                                <a href="YOUR_TABLEAU_PUBLIC_PROFILE_URL"
+                                   target="_blank"
+                                   rel="noopener noreferrer">
+                                    📈 Tableau Public
+                                </a>
+                                 
+                                Will be added later
+                                -->
+
+                                <a 
+                                   target="_blank"
+                                   rel="noopener noreferrer">
+                                    ✍️ 📧Email: contact@anirbanchowdhury.com
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="contact-info-card">
+
+                        <div class="contact-info-icon">💻</div>
+
+                        <div class="contact-info-text">
+
+                            <h3>GitHub Repositories</h3>
+
+                            <p>
+                                Explore my projects, analytical work,
+                                and programming practice.
+                            </p>
+
+                            <details class="repository-dropdown">
+
+                                <summary>Explore Repositories</summary>
+
+                                <div class="repository-dropdown-menu">
+
+                                    <a href="https://github.com/excelwithanir/AccountReceivables"
+                                       target="_blank"
+                                       rel="noopener noreferrer">
+                                        Account Receivales Analytics
+                                    </a>
+                                    <!--
+                                    <a href="https://github.com/anirtest1/excelanir-website-practice"
+                                       target="_blank"
+                                       rel="noopener noreferrer">
+                                        Repo-2
+                                    </a>
+
+                                    <a href="https://github.com/anirtest1/github-practice-1"
+                                       target="_blank"
+                                       rel="noopener noreferrer">
+                                        Repo-3
+                                    </a>
+                                    -->
+                                </div>
+
+                            </details>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- Clickable Zoho Forms Collaboration Inquiry -->
+
+            <div class="contact-inquiry">
+
+                <a
+                    href="https://forms.zohopublic.in/anirbanchowdhuryzoho1/form/ContactUs/formperma/RsxCsBq3Y14ZOMj_eWRbpvp9uf0fwLV6jHHl9BGNpX4"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    Click To Send Direct Collaboration Enquiry
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==============================
+         FOOTER
+         ============================== -->
+
+    <footer>
+
+        <div class="container">
+
+            <p>
+                © Anirban Chowdhury |
+                <a href="index.html">Back To Top</a>
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- Connect JavaScript -->
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,249 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Anirban Chowdhury's end-to-end Accounts Receivable Analytics project using Power BI, DAX, Python and pandas.">
+    <title>Accounts Receivable Analytics | Anirban Chowdhury</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root{--ar-bg:#0b1020;--ar-card:#121a2e;--ar-hover:#18243b;--ar-border:#293751;--ar-blue:#70a7ff;--ar-text:#eef3ff;--ar-muted:#b6c6e4;--ar-green:#49f0c0;--ar-yellow:#ffd34d;--ar-purple:#c9a5ff}
+        html{scroll-behavior:smooth;scroll-padding-top:90px}
+        .ar-page{background:var(--ar-bg);color:var(--ar-text);font-family:Arial,Helvetica,sans-serif;line-height:1.7;overflow-wrap:anywhere}
+        .ar-page *{box-sizing:border-box}.ar-container{width:90%;max-width:1180px;margin:0 auto}
+        .ar-page a{color:var(--ar-blue)}.ar-page a:hover{color:#a9cbff}
+        .ar-page h1,.ar-page h2,.ar-page h3,.ar-page h4{color:#fff;line-height:1.3}
+        .ar-page h2{font-size:clamp(25px,3vw,34px);margin:0 0 18px}.ar-page h3{font-size:20px;margin:0 0 12px}
+        .ar-page p{color:var(--ar-muted);margin:0 0 16px}.ar-page ul{color:var(--ar-muted);padding-left:22px;margin:10px 0 18px}.ar-page li{margin-bottom:7px}
+        .ar-eyebrow{color:var(--ar-blue)!important;text-transform:uppercase;letter-spacing:1.8px;font-size:12px;font-weight:800;margin-bottom:12px!important}
+        .ar-section{padding:65px 0;scroll-margin-top:75px}.ar-section-heading{max-width:850px;margin-bottom:32px}.ar-section-heading p{font-size:16px}
+        .ar-hero{padding:70px 0 55px;background:radial-gradient(ellipse at top right,rgba(62,115,204,.2),transparent 55%),var(--ar-bg)}
+        .ar-hero h1{max-width:950px;font-size:clamp(34px,5vw,57px);font-weight:800;letter-spacing:-1.2px;margin:0 0 20px}
+        .ar-gradient-text{background:linear-gradient(90deg,#70a7ff,#8be2ff,#49f0c0);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+        .ar-hero-description{max-width:850px;font-size:18px;line-height:1.8}.ar-meta,.ar-actions{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0}
+        .ar-tag{display:inline-block;padding:7px 12px;border:1px solid var(--ar-border);background:var(--ar-card);color:#c8dcff;border-radius:30px;font-size:12px;font-weight:700}
+        .ar-button{display:inline-block;text-decoration:none;border:1px solid var(--ar-blue);border-radius:9px;padding:11px 18px;font-weight:700;font-size:14px;transition:background .2s,transform .2s}
+        .ar-button-primary{color:#0b1020!important;background:var(--ar-blue)}.ar-button-secondary{color:#c8dcff!important;background:transparent}.ar-button:hover{transform:translateY(-2px)}.ar-button-primary:hover{background:#a9cbff}.ar-button-secondary:hover{background:var(--ar-hover)}
+        .ar-stats-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:35px}
+        .ar-stat-card,.ar-card,.ar-source-card,.ar-scope-box{background:var(--ar-card);border:1px solid var(--ar-border);border-radius:15px}
+        .ar-stat-card{padding:21px}.ar-stat-value{display:block;color:var(--ar-blue);font-size:clamp(21px,2.5vw,29px);font-weight:800;line-height:1.3;margin-bottom:8px}
+        .ar-stat-label{display:block;color:#fff;font-weight:700;font-size:14px}.ar-stat-note{display:block;color:var(--ar-muted);font-size:12px;margin-top:5px}
+        .ar-grid-2,.ar-grid-3{display:grid;gap:20px}.ar-grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}.ar-grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+        .ar-card{height:100%;padding:25px;transition:border-color .2s,background .2s,transform .2s}.ar-card:hover{background:var(--ar-hover);border-color:var(--ar-blue);transform:translateY(-2px)}
+        .ar-card-icon{font-size:27px;display:block;margin-bottom:14px}.ar-highlight{color:var(--ar-green)!important;font-weight:700}
+        .ar-callout{padding:22px 24px;margin-top:24px;background:#101d32;border-left:4px solid var(--ar-blue);border-radius:8px}.ar-callout p:last-child,.ar-card p:last-child{margin-bottom:0}
+        .ar-timeline{border-left:2px solid var(--ar-border);padding-left:24px;margin-left:8px}.ar-timeline-item{position:relative;padding:0 0 25px}.ar-timeline-item:last-child{padding-bottom:0}
+        .ar-timeline-item:before{content:"";position:absolute;width:12px;height:12px;border-radius:50%;background:var(--ar-blue);left:-31px;top:7px}.ar-timeline-item h3{font-size:17px;margin-bottom:6px}
+        .ar-date-label{color:var(--ar-blue);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px}
+        .ar-source-card{padding:18px;text-align:center}.ar-source-card strong{display:block;color:#fff;font-size:15px}.ar-source-card span{display:block;font-size:12px;color:var(--ar-muted);margin-top:4px}
+        .ar-rule-card{display:flex;flex-direction:column;gap:10px}.ar-rule-card h3{margin-bottom:0}.ar-formula{display:block;padding:12px 14px;border-radius:9px;background:#0b1325;border:1px solid #24344e;color:#a9d2ff;font-family:Consolas,"Courier New",monospace;font-size:13px;line-height:1.7;white-space:normal}
+        .ar-risk-list{display:grid;gap:12px}.ar-risk-item{padding:16px;border:1px solid var(--ar-border);background:#0e172a;border-radius:11px}.ar-risk-item strong{display:block;color:#fff;margin-bottom:5px}.ar-risk-item p{font-size:14px;margin-bottom:0}
+        .ar-report-card{display:flex;flex-direction:column;align-items:flex-start}.ar-report-number{color:var(--ar-blue);font-size:13px;font-weight:800;letter-spacing:1px;margin-bottom:10px}
+        .ar-report-placeholder{width:100%;min-height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;margin-bottom:20px;border:1px dashed #49638a;border-radius:12px;background:linear-gradient(135deg,rgba(112,167,255,.08),rgba(73,240,192,.04));text-align:center}
+        .ar-report-placeholder span{font-size:28px;margin-bottom:8px}.ar-report-placeholder p{font-size:12px;margin:0}.ar-report-card .ar-button{margin-top:auto}
+        .ar-scope-box{padding:24px}.ar-footer{padding:28px 0;background:#080c18;border-top:1px solid #202d43;text-align:center}.ar-footer p{margin:0;font-size:13px}.ar-footer a{text-decoration:none}
+        @media(max-width:950px){.ar-stats-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.ar-grid-3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+        @media(max-width:700px){.ar-section{padding:45px 0}.ar-hero{padding:48px 0 35px}.ar-grid-2,.ar-grid-3{grid-template-columns:1fr}.ar-hero-description{font-size:16px}.ar-card{padding:21px}}
+        @media(max-width:420px){.ar-stats-grid{grid-template-columns:1fr}.ar-meta{gap:7px}.ar-tag{font-size:11px}.ar-actions{flex-direction:column;align-items:stretch}.ar-button{text-align:center}}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav">
+            <div class="logo"><a href="index.html">Anirban Chowdhury</a></div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="older-projects.html">Older Projects</a></li>
+                <li><a href="Blog.html" aria-current="page">Blog</a></li>
+                <li><a href="About%20Me.html">About Me</a></li>
+                <li><a href="#project-contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="ar-page" id="top">
+        <section class="ar-hero">
+            <div class="ar-container">
+                <p class="ar-eyebrow">End-to-End Data Analytics Project</p>
+                <h1>Accounts Receivable <span class="ar-gradient-text">Analytics</span></h1>
+                <p class="ar-hero-description">From raw customer, invoice and payment data to financial KPIs, customer-risk analysis and interactive Power BI reports. This project explores how structured data preparation, Python, data modelling and DAX can support better Accounts Receivable decision-making.</p>
+                <div class="ar-meta">
+                    <span class="ar-tag">Power BI</span><span class="ar-tag">DAX</span><span class="ar-tag">Python &amp; pandas</span><span class="ar-tag">Data Modelling</span><span class="ar-tag">Financial Analytics</span><span class="ar-tag">Customer Risk</span>
+                </div>
+                <div class="ar-actions">
+                    <a class="ar-button ar-button-primary" href="#dashboard-reports">Explore the Dashboard Reports</a>
+                    <a class="ar-button ar-button-secondary" href="#end-to-end">Explore the Data Journey</a>
+                    <a class="ar-button ar-button-primary" href="#github-repository">Explore the GitHub Repository</a>
+                    <a class="ar-button ar-button-secondary" href="#video-demonstration">Video Demonstration</a>
+                </div>
+                <div class="ar-stats-grid">
+                    <div class="ar-stat-card"><span class="ar-stat-value">3</span><span class="ar-stat-label">Power BI Reports</span><span class="ar-stat-note">Executive, customer risk and trends</span></div>
+                    <div class="ar-stat-card"><span class="ar-stat-value">5</span><span class="ar-stat-label">Customer Source Formats</span><span class="ar-stat-note">Excel, CSV, database, text and JSON</span></div>
+                    <div class="ar-stat-card"><span class="ar-stat-value">2023–2026</span><span class="ar-stat-label">Analysis Period</span><span class="ar-stat-note">1 January 2023 – 31 July 2026</span></div>
+                    <div class="ar-stat-card"><span class="ar-stat-value">End-to-End</span><span class="ar-stat-label">Analytical Workflow</span><span class="ar-stat-note">Data preparation through reporting</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="ar-section"><div class="ar-container">
+            <div class="ar-section-heading"><p class="ar-eyebrow">Business Context</p><h2>Why Accounts Receivable Analytics?</h2><p>Accounts Receivable represents money a business is owed by customers for goods or services already supplied on credit. Sales do not automatically translate into cash received. When invoices remain unpaid, businesses can experience cash-flow pressure, delayed collections and increased credit exposure.</p><p>An outstanding-balance report tells management how much money is owed, but not necessarily how old those balances are, how effectively collections are performing, or which customers need attention first. This project connects those questions through financial KPIs, ageing analysis, payment behaviour and a documented customer-risk framework.</p></div>
+            <div class="ar-grid-3">
+                <article class="ar-card"><span class="ar-card-icon">💰</span><h3>Understand Exposure</h3><p>Examine outstanding and overdue receivables to understand how much customer debt remains to be collected.</p></article>
+                <article class="ar-card"><span class="ar-card-icon">⏱️</span><h3>Evaluate Collections</h3><p>Analyse DSO, collection rates, ageing distribution, payment days and payment delays.</p></article>
+                <article class="ar-card"><span class="ar-card-icon">🛡️</span><h3>Identify Customer Risk</h3><p>Combine credit utilization, overdue exposure, payment behaviour and collection risk instead of relying on balances alone.</p></article>
+            </div>
+        </div></section>
+
+        <section class="ar-section"><div class="ar-container">
+            <div class="ar-section-heading"><p class="ar-eyebrow">Historical Scope</p><h2>Analysis Period and Data Cut-off</h2><p>A consistent historical reference date is essential when determining whether invoices are overdue and how outstanding balances should be classified into ageing categories.</p></div>
+            <div class="ar-grid-2">
+                <article class="ar-card"><span class="ar-card-icon">📅</span><h3>Analysis Period</h3><p class="ar-highlight">1 January 2023 – 31 July 2026</p><p>The project brings together invoice and payment data for 2023, 2024, 2025 and 2026, with 2026 transactions included only through 31 July.</p></article>
+                <article class="ar-card"><span class="ar-card-icon">📌</span><h3>Fixed Historical Cut-off</h3><p class="ar-highlight">31 July 2026</p><p>This date provides a consistent reference for historical overdue status, days overdue and ageing analysis, making the historical snapshot reproducible.</p></article>
+            </div>
+            <div class="ar-callout"><p><strong>Important distinction:</strong> the calendar dimension extends through 31 December 2026, but those calendar dates do not mean actual invoice data is available through the end of 2026. The fixed historical cut-off remains 31 July 2026.</p></div>
+        </div></section>
+
+        <section class="ar-section" id="end-to-end"><div class="ar-container">
+            <div class="ar-section-heading"><p class="ar-eyebrow">Beyond Visualisation</p><h2>The End-to-End Data Preparation Journey</h2><p>The project covers the steps required to turn differently structured source data into a consistent analytical model. Dashboard development is one part of the process, not the entire solution.</p></div>
+            <div class="ar-timeline">
+                <div class="ar-timeline-item"><span class="ar-date-label">Stage 01</span><h3>Inspect the Source Data</h3><p>Review customer records provided in five different formats, together with annual invoice and payment CSV files.</p></div>
+                <div class="ar-timeline-item"><span class="ar-date-label">Stage 02</span><h3>Standardise Customer Records with Python</h3><p>Use Python and pandas notebooks to standardise column names, trim whitespace, harmonise customer-segment values and standardise region names.</p></div>
+                <div class="ar-timeline-item"><span class="ar-date-label">Stage 03</span><h3>Validate Data Quality</h3><p>Inspect duplicate customer identifiers, conflicting records, null values and blank or whitespace-only values before customer reconciliation.</p></div>
+                <div class="ar-timeline-item"><span class="ar-date-label">Stage 04</span><h3>Reconcile the Customer Master</h3><p>Establish a consistent customer structure for CustomerID, CustomerName, Region, CustomerSegment and CreditLimit. Reconciliation supports consistent customer identity and credit attributes across the analytical model.</p></div>
+                <div class="ar-timeline-item"><span class="ar-date-label">Stage 05</span><h3>Consolidate Invoice and Payment Data</h3><p>Combine annual invoice files into a consolidated invoice fact table and annual payment files into a consolidated payment fact table.</p></div>
+                <div class="ar-timeline-item"><span class="ar-date-label">Stage 06</span><h3>Build the Data Model and Calendar</h3><p>Establish the customer dimension, invoice and payment facts, and a calendar dimension covering 1 January 2023 through 31 December 2026.</p></div>
+                <div class="ar-timeline-item"><span class="ar-date-label">Stage 07</span><h3>Implement Business Rules and DAX</h3><p>Translate the documented definitions for outstanding AR, overdue exposure, ageing, collection rates, DSO, credit utilization and customer risk into calculated columns and measures.</p></div>
+                <div class="ar-timeline-item"><span class="ar-date-label">Stage 08</span><h3>Develop and Publish Power BI Reports</h3><p>Present executive KPIs, customer exposure and risk, and historical trends through three Power BI reports intended for interactive exploration.</p></div>
+            </div>
+        </div></section>
+
+        <section class="ar-section"><div class="ar-container">
+            <div class="ar-section-heading"><p class="ar-eyebrow">Data Quality &amp; Integration</p><h2>Five Customer Data Source Formats</h2><p>Customer information was represented in different source formats, with variations in field names, formatting and customer-segment values. These differences needed to be addressed before reliable customer-level analysis could be performed.</p></div>
+            <div class="ar-grid-3">
+                <div class="ar-source-card"><span style="font-size:28px">📗</span><strong>Excel</strong><span>Spreadsheet records</span></div>
+                <div class="ar-source-card"><span style="font-size:28px">📄</span><strong>CSV</strong><span>Delimited records</span></div>
+                <div class="ar-source-card"><span style="font-size:28px">🗄️</span><strong>Database Extract</strong><span>Structured database records</span></div>
+                <div class="ar-source-card"><span style="font-size:28px">📝</span><strong>Text File</strong><span>Text-based records</span></div>
+                <div class="ar-source-card"><span style="font-size:28px">{ }</span><strong>JSON</strong><span>Structured key-value records</span></div>
+                <div class="ar-source-card"><span style="font-size:28px">🐍</span><strong>Python &amp; pandas</strong><span>Standardisation and validation</span></div>
+            </div>
+            <div class="ar-grid-2" style="margin-top:20px">
+                <article class="ar-card"><h3>Why Standardisation Was Necessary</h3><p>The same business value can be represented differently across source systems. For example, “Large Enterprise” and “LARGE ENTERPRISE” should not remain inconsistent simply because they originated in different files. Python notebooks standardised relevant fields and prepared the datasets for reconciliation.</p></article>
+                <article class="ar-card"><h3>Why Validation Was Necessary</h3><p>Customer identifiers were normalised by trimming whitespace and converting them to uppercase before duplicate checks. The notebooks also inspected null values, blanks and potentially conflicting records. Standardisation makes records more consistent; validation identifies issues requiring further review.</p></article>
+            </div>
+            <div class="ar-callout"><p><strong>Data modelling decision:</strong> the standardised and reconciled customer master provides a common customer dimension. Invoice and payment transactions are consolidated separately because they represent different transaction levels. This helps prevent inconsistent customer attributes and unreliable customer-level aggregations.</p></div>
+        </div></section>
+
+        <section class="ar-section"><div class="ar-container">
+            <div class="ar-section-heading"><p class="ar-eyebrow">Data Modelling</p><h2>Why Consolidated Fact Tables and a Calendar Matter</h2></div>
+            <div class="ar-grid-3">
+                <article class="ar-card"><span class="ar-card-icon">🧾</span><h3>Invoice Fact</h3><p>Annual invoice files for 2023, 2024, 2025 and 2026 are consolidated into one transaction layer. This supports consistent calculations for invoice amounts, due dates, outstanding balances and ageing.</p></article>
+                <article class="ar-card"><span class="ar-card-icon">💳</span><h3>Payment Fact</h3><p>Consolidated payment transactions support collection totals, invoice settlement analysis, final payment dates and payment-delay calculations. An invoice may receive multiple payments, so the model must respect transaction detail.</p></article>
+                <article class="ar-card"><span class="ar-card-icon">📆</span><h3>Calendar Dimension</h3><p>A calendar from 1 January 2023 through 31 December 2026 provides a consistent date structure for filtering, monthly and annual reporting, and historical trend analysis.</p></article>
+            </div>
+            <div class="ar-callout"><p><strong>Why this matters:</strong> consolidating annual transaction files reduces the need to maintain separate year-specific calculations. A dedicated calendar supports consistent time-based analysis, while distinct invoice and payment facts respect different levels of transaction detail.</p></div>
+        </div></section>
+
+        <section class="ar-section"><div class="ar-container">
+            <div class="ar-section-heading"><p class="ar-eyebrow">Business Logic</p><h2>Business Rules That Drive the Analysis</h2><p>The value of the reports depends on translating transactional data into consistent, meaningful business measures. These examples explain the principal calculations and how they support receivables analysis.</p></div>
+            <div class="ar-grid-2">
+                <article class="ar-card ar-rule-card"><h3>Outstanding Accounts Receivable</h3><span class="ar-formula">Outstanding AR = Invoice Amount − Total Payments</span><p>Represents the unpaid balance remaining on invoices and provides a starting point for receivables exposure analysis.</p></article>
+                <article class="ar-card ar-rule-card"><h3>Overdue Accounts Receivable</h3><span class="ar-formula">Outstanding balance on invoices past their due date at the cut-off</span><p>Uses the fixed historical cut-off of 31 July 2026. Fully paid invoices are not treated as overdue merely because their due dates have passed.</p></article>
+                <article class="ar-card ar-rule-card"><h3>Ageing and Ageing Buckets</h3><span class="ar-formula">Current · 1–30 · 31–60 · 61–90 · 91–120 · More than 120 days</span><p>Groups receivables by overdue duration, helping management identify where older outstanding balances are concentrated. Fully paid invoices are not assigned an ageing bucket.</p></article>
+                <article class="ar-card ar-rule-card"><h3>Days Sales Outstanding (DSO)</h3><span class="ar-formula">DSO = (Average AR ÷ Credit Sales) × Number of Days</span><span class="ar-formula">Average AR = (Opening AR + Closing AR) ÷ 2</span><p>Estimates how many days of credit sales are represented by average receivables. A higher DSO can indicate a lengthening collection cycle and should be interpreted alongside other AR measures.</p></article>
+                <article class="ar-card ar-rule-card"><h3>Collection Rate</h3><span class="ar-formula">Collection Rate = Amount Collected ÷ Amount Due for Collection × 100</span><p>The documented working implementation uses invoices due on or before 31 July 2026 for the amount-due population. Collection rate should be considered alongside the absolute uncollected amount.</p></article>
+                <article class="ar-card ar-rule-card"><h3>Payment Days and Payment Delay</h3><span class="ar-formula">Payment Days = Final Payment Date − Invoice Date</span><span class="ar-formula">Payment Delay = Final Payment Date − Due Date</span><p>Negative delay indicates early payment; zero indicates on-time payment; positive delay indicates late payment. Actual payment delay remains blank where a final payment date does not exist.</p></article>
+                <article class="ar-card ar-rule-card"><h3>Credit Utilization</h3><span class="ar-formula">Credit Utilization % = Outstanding AR ÷ Credit Limit × 100</span><p>Shows how much of a customer's approved credit limit is represented by outstanding receivables. High utilization becomes more meaningful when combined with overdue exposure and payment behaviour.</p></article>
+                <article class="ar-card ar-rule-card"><h3>Credit Limit Breach</h3><span class="ar-formula">Credit Limit Breach = Outstanding AR &gt; Credit Limit</span><p>Identifies customers whose outstanding receivables exceed their approved credit limit under the project's defined rule.</p></article>
+                <article class="ar-card ar-rule-card"><h3>On-Time Payment Percentage</h3><span class="ar-formula">On-Time Payment % = On-Time Paid Invoice Count ÷ Paid Invoice Count</span><p>Adds a payment-behaviour perspective by measuring the proportion of paid invoices settled on time.</p></article>
+            </div>
+        </div></section>
+
+        <section class="ar-section"><div class="ar-container">
+            <div class="ar-section-heading"><p class="ar-eyebrow">Customer Exposure &amp; Risk</p><h2>Risk Is More Than a Large Outstanding Balance</h2><p>The documented framework combines credit exposure, payment behaviour and collection risk. A customer is not automatically classified as critical simply because its outstanding balance is large.</p></div>
+            <div class="ar-risk-list">
+                <div class="ar-risk-item"><strong>01 — Credit / Overdue Risk</strong><p>Credit Utilization % is greater than 90% and Overdue AR is greater than zero.</p></div>
+                <div class="ar-risk-item"><strong>02 — Payment Behaviour Risk</strong><p>On-Time Payment % is below 50%, the customer has at least one unpaid or partially paid invoice, and at least one relevant outstanding invoice in the 61–90, 91–120 or more-than-120-day ageing categories.</p></div>
+                <div class="ar-risk-item"><strong>03 — Collection Risk Severity</strong><p>Collection risk is classified as Low, Medium, High or Critical according to the project's defined Collection Rate thresholds.</p></div>
+                <div class="ar-risk-item"><strong>04 — Critical Risky Customer</strong><p>The customer must satisfy the Credit/Overdue Risk condition, the Payment Behaviour Risk condition, and have High or Critical collection risk. All three conditions are required.</p></div>
+            </div>
+            <div class="ar-callout"><p><strong>Why this approach?</strong> The combined framework makes risk more explainable by showing the conditions contributing to the classification. It distinguishes customers with high credit exposure from customers who also demonstrate problematic payment behaviour and collection risk.</p></div>
+        </div></section>
+
+        <section class="ar-section"><div class="ar-container">
+            <div class="ar-section-heading"><p class="ar-eyebrow">Power BI &amp; DAX</p><h2>From Business Definitions to Analytical Measures</h2><p>DAX measures implement the business rules in the Power BI model and respond to the applicable reporting context, including customer selection, date filters and other report filters.</p></div>
+            <div class="ar-grid-3">
+                <article class="ar-card"><span class="ar-card-icon">📐</span><h3>Receivables Measures</h3><ul><li>Outstanding AR</li><li>Overdue AR</li><li>Overdue Rate %</li><li>Opening and Closing AR</li><li>Average AR</li></ul></article>
+                <article class="ar-card"><span class="ar-card-icon">📊</span><h3>Collection Measures</h3><ul><li>Total Collections</li><li>Collection Rate %</li><li>DSO</li><li>On-Time Payment %</li><li>Average Payment Delay</li></ul></article>
+                <article class="ar-card"><span class="ar-card-icon">🛡️</span><h3>Credit &amp; Risk Measures</h3><ul><li>Credit Utilization %</li><li>Credit Limit Breach</li><li>Customer eligibility</li><li>Payment-behaviour risk</li><li>Critical Risky Customer</li></ul></article>
+            </div>
+            <div class="ar-callout"><p>The model uses both invoice-level calculated columns, such as Days Overdue, Ageing Bucket, Payment Status, Payment Days and Payment Delay, and dynamic measures that aggregate or calculate values in the current report context. These serve different purposes within the analytical model.</p></div>
+        </div></section>
+
+        <section class="ar-section" id="dashboard-reports"><div class="ar-container">
+            <div class="ar-section-heading"><p class="ar-eyebrow">The Reporting Solution</p><h2>Three Connected Power BI Reports</h2><p>The solution is organised around three complementary perspectives: the executive receivables position, customer exposure and risk, and historical trends and collection performance.</p></div>
+            <div class="ar-grid-3">
+                <article class="ar-card ar-report-card"><span class="ar-report-number">REPORT 01</span><div class="ar-report-placeholder"><span>📊</span><p>Replace this placeholder with a screenshot of your actual AR Executive Overview.</p></div><h3>AR Executive Overview</h3><p>A management snapshot of receivables exposure and collection performance.</p><ul><li>Outstanding AR</li><li>Overdue AR and Overdue %</li><li>Collection Rate</li><li>DSO</li><li>On-Time Payment %</li></ul><a class="ar-button ar-button-secondary" href="https://workdataanalysis-my.sharepoint.com/:v:/g/personal/anirbanchowdhury_workdataanalysis_onmicrosoft_com/IQAHaBaRfT_JR7JGPvGHrKXMAaQES9TUTTIUdAHA_SV-u6k?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=sDDTmL">Report link details</a></article>
+                <article class="ar-card ar-report-card"><span class="ar-report-number">REPORT 02</span><div class="ar-report-placeholder"><span>🛡️</span><p>Replace this placeholder with a screenshot of your actual Customer Exposure &amp; Risk report.</p></div><h3>Customer Exposure &amp; Risk</h3><p>A customer-focused view of credit exposure, payment behaviour and collection risk.</p><ul><li>Customer payment exposure</li><li>Credit and overdue risk</li><li>Payment-behaviour risk</li><li>Collection risk severity</li><li>Critical Risky Customer framework</li></ul><a class="ar-button ar-button-secondary" href="https://workdataanalysis-my.sharepoint.com/:v:/g/personal/anirbanchowdhury_workdataanalysis_onmicrosoft_com/IQCS_P5ZWgyTRJY0_WJ1MQUsAdW0D8Ff-h1BW7Mq4-sjFz0?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=C29Osm">Report link details</a></article>
+                <article class="ar-card ar-report-card"><span class="ar-report-number">REPORT 03</span><div class="ar-report-placeholder"><span>📈</span><p>Replace this placeholder with a screenshot of your actual AR Trends &amp; Performance report.</p></div><h3>AR Trends &amp; Performance</h3><p>A historical view of receivables movements, collections and payment delays.</p><ul><li>Closing AR and Overdue AR trends</li><li>DSO by year and month</li><li>Total collections</li><li>Average payment delay</li><li>Collection-rate trends and ageing</li></ul><a class="ar-button ar-button-secondary" href="https://workdataanalysis-my.sharepoint.com/:v:/g/personal/anirbanchowdhury_workdataanalysis_onmicrosoft_com/IQDponiV-vyqRL0eOL6ZAC-qARtj5RTGK4YzhXrwcSpSekE?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=BMkorh">Report link details</a></article>
+            </div>
+        </div></section>
+
+        <section class="ar-section"><div class="ar-container">
+            <div class="ar-section-heading"><p class="ar-eyebrow">Project Scope</p><h2>Current Scope and Future Enhancement</h2></div>
+            <div class="ar-grid-2">
+                <article class="ar-card"><span class="ar-card-icon">✓</span><h3>Included in the Present Project</h3><ul><li>Customer data standardisation and validation</li><li>Customer reconciliation</li><li>Consolidated invoice and payment datasets</li><li>Calendar and analytical data modelling</li><li>Documented business rules and DAX calculations</li><li>Three Power BI reporting solutions</li></ul></article>
+                <article class="ar-card"><span class="ar-card-icon">⚙️</span><h3>Potential Future Enhancement</h3><p>Automated ingestion of new data, repeatable validation and reconciliation workflows, and refresh orchestration are outside the present scope.</p><p>Automation may be considered in a future phase, subject to agreed data-delivery arrangements, refresh requirements and deployment considerations.</p></article>
+            </div>
+        </div></section>
+
+        <section class="ar-section"><div class="ar-container">
+            <div class="ar-section-heading"><p class="ar-eyebrow">Project Outcomes</p><h2>What This Project Demonstrates</h2><p>This project demonstrates a broader analytical workflow, from source-data preparation to business-focused reporting.</p></div>
+            <div class="ar-grid-3">
+                <article class="ar-card"><h3>Data Preparation</h3><ul><li>Five customer source formats</li><li>Python and pandas notebooks</li><li>Duplicate, null and blank checks</li><li>Customer standardisation and reconciliation</li></ul></article>
+                <article class="ar-card"><h3>Analytics &amp; Modelling</h3><ul><li>Consolidated invoice and payment facts</li><li>Customer and calendar dimensions</li><li>DAX measures and calculated columns</li><li>AR and customer-risk business rules</li></ul></article>
+                <article class="ar-card"><h3>Business Reporting</h3><ul><li>Executive receivables overview</li><li>Customer exposure and risk</li><li>Historical trends and performance</li><li>Reports designed for interaction</li></ul></article>
+            </div>
+            <div class="ar-callout"><p><strong>Project summary:</strong> Accounts Receivable Analytics with Power BI demonstrates how differently structured transactional data can be prepared, modelled and translated into financial KPIs and customer-risk insights. The three-report solution brings together executive visibility, customer exposure analysis and historical receivables performance.</p></div>
+        </div></section>
+
+        <section class="ar-section" style="padding:20px 0 30px;">
+            <div class="ar-container">
+                <div class="ar-grid-2">
+                    <section id="video-demonstration" class="ar-card" style="text-align:center;">
+                        <p class="ar-eyebrow">Video Demonstration</p>
+                        <div class="ar-actions" style="justify-content:center;margin:16px 0 0;">
+                            <a class="ar-button ar-button-secondary" href="https://tinyurl.com/56659xe6" target="_blank" rel="noopener noreferrer">Watch the Video Demonstration</a>
+                        </div>
+                    </section>
+
+                    <section id="github-repository" class="ar-card" style="text-align:center;">
+                        <p class="ar-eyebrow">GitHub Repository</p>
+                        <div class="ar-actions" style="justify-content:center;margin:16px 0 0;">
+                            <a class="ar-button ar-button-primary" href="https://github.com/excelwithanir/AccountReceivables" target="_blank" rel="noopener noreferrer">Explore the GitHub Repository</a>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </section>
+
+        <section class="ar-section" id="project-contact">
+            <div class="ar-container">
+                <div class="ar-section-heading" style="margin:0 auto;text-align:center">
+                    <p class="ar-eyebrow">Let's Connect</p>
+                    <h2>Interested in Data Analytics?</h2>
+                    <p>If you would like to discuss data analytics, Power BI reporting, financial analysis or potential collaboration, I would be glad to connect.</p>
+                    <div class="ar-actions" style="justify-content:center;align-items:center;gap:10px;">
+                        <a class="ar-button ar-button-primary" href="https://forms.zohopublic.in/anirbanchowdhuryzoho1/form/ContactUs/formperma/RsxCsBq3Y14ZOMj_eWRbpvp9uf0fwLV6jHHl9BGNpX4" target="_blank" rel="noopener noreferrer">Send a Collaboration Enquiry</a>
+                        <a class="ar-button ar-button-secondary" href="index.html">Return to Portfolio</a>
+                        <a class="ar-button ar-button-primary" href="#top">Return To Top</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="ar-footer"><div class="ar-container"><p>© Anirban Chowdhury</p></div></footer>
+</body>
+</html>

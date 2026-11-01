@@ -1,0 +1,545 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Explore older projects by Anirban Chowdhury, including Python Excel automation, interactive dashboards, health tracking and employee leave management.">
+
+    <title>Older Projects | Anirban Chowdhury</title>
+
+    <!-- Connect external CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Older Projects Page Styles -->
+    <style>
+        .older-projects-hero {
+            padding: 68px 0 36px;
+            text-align: center;
+        }
+
+        .older-projects-hero h1 {
+            color: #70a7ff;
+            font-size: clamp(36px, 5vw, 54px);
+            line-height: 1.15;
+            margin-bottom: 18px;
+        }
+
+        .older-projects-intro {
+            max-width: 780px;
+            margin: 0 auto;
+            color: #b5c4df;
+            font-size: 17px;
+            line-height: 1.8;
+        }
+
+        .older-projects-content {
+            padding: 24px 0 76px;
+        }
+
+        .older-projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 28px;
+            align-items: stretch;
+        }
+
+        .older-project-card {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            overflow: hidden;
+            background: #121a2e;
+            border: 1px solid #26324d;
+            border-radius: 16px;
+            transition: transform 0.2s ease,
+                        border-color 0.2s ease,
+                        background 0.2s ease;
+        }
+
+        .older-project-card:hover {
+            transform: translateY(-4px);
+            border-color: #70a7ff;
+            background: #16223a;
+        }
+
+        .older-project-image {
+            width: 100%;
+            height: 260px;
+            display: block;
+            object-fit: contain;
+            background: #0b1020;
+            border-bottom: 1px solid #26324d;
+
+            /* Smooth image enlargement on hover */
+            transition: transform 0.3s ease;
+        }
+
+        /* NEW: Enlarge the image when the pointer hovers over it */
+        .older-project-image:hover {
+            transform: scale(1.06);
+        }
+
+        .older-project-details {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            padding: clamp(20px, 3vw, 30px);
+        }
+
+        .older-project-details h2 {
+            color: #70a7ff;
+            font-size: clamp(20px, 2.5vw, 25px);
+            line-height: 1.4;
+            margin: 0 0 16px;
+        }
+
+        .older-project-details p {
+            color: #c2cde1;
+            font-size: 15px;
+            line-height: 1.9;
+            margin: 0 0 16px;
+        }
+
+        .older-project-details .project-link {
+            display: inline-block;
+            align-self: flex-start;
+            margin-top: auto;
+            padding-top: 10px;
+            color: #70a7ff;
+            font-size: 15px;
+            font-weight: 700;
+            line-height: 1.6;
+            text-decoration: none;
+            overflow-wrap: anywhere;
+        }
+
+        .older-project-details .project-link:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        .older-projects-note {
+            margin-top: 32px;
+            padding: 22px 26px;
+            border-left: 4px solid #70a7ff;
+            border-radius: 0 12px 12px 0;
+            background: #16223a;
+            color: #c2cde1;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .older-projects-back {
+            margin-top: 32px;
+            text-align: center;
+        }
+
+        @media (max-width: 700px) {
+            .older-projects-hero {
+                padding: 48px 0 28px;
+            }
+
+            .older-projects-content {
+                padding-top: 18px;
+            }
+
+            .older-projects-grid {
+                grid-template-columns: 1fr;
+                gap: 22px;
+            }
+
+            .older-project-image {
+                height: 230px;
+            }
+        }
+    </style>
+
+</head>
+
+<body id="top">
+
+    <!-- ==============================
+         HEADER / NAVIGATION
+         ============================== -->
+
+    <header>
+
+        <div class="container nav">
+
+            <div class="logo">
+                <a href="index.html">Anirban Chowdhury</a>
+            </div>
+
+            <ul class="nav-links">
+
+                <li>
+                    <a href="index.html#projects">MyProjects</a>
+                </li>
+
+                <li>
+                    <a href="older-projects.html" aria-current="page">Older Projects</a>
+                </li>
+
+                <li>
+                    <a href="Blog.html" aria-current="page">Blog</a>
+                </li>
+
+                <li>
+                    <a href="About%20Me.html">About Me</a>
+                </li>
+
+                <li>
+                    <a href="index.html#contact">Contact</a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </header>
+
+
+    <!-- ==============================
+         OLDER PROJECTS INTRODUCTION
+         ============================== -->
+
+    <main>
+
+        <section class="older-projects-hero">
+
+            <div class="container">
+
+                <h1>Older Projects</h1>
+
+                <p class="older-projects-intro">
+                    A collection of earlier projects developed around
+                    practical business requirements, Excel automation,
+                    data tracking and interactive reporting. Each project
+                    reflects an effort to understand a real-world need
+                    and build a useful analytical solution.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==============================
+             OLDER PROJECTS GRID
+             ============================== -->
+
+        <section class="older-projects-content">
+
+            <div class="container">
+
+                <div class="older-projects-grid">
+
+
+                    <!-- ==========================================
+                         PROJECT 1: AUTOMATE EXCEL WITH PYTHON
+                         ========================================== -->
+
+                    <article class="older-project-card">
+
+                        <div class="older-project-details">
+
+                            <h2>Automate Excel With Python</h2>
+
+                            <p>
+                                VBA can be used for automating many repetitive
+                                Excel file formatting tasks. But due to a
+                                specific requirement of one of my clients,
+                                VBA was strictly forbidden. It was a pain
+                                point for him doing the same task every week,
+                                which consumed several hours of his workday.
+                            </p>
+
+                            <p>
+                                I came out with a simple Python script using
+                                packages like Openpyxl and Tkinter. With a
+                                little bit of instruction, I was glad I could
+                                save a lot of his time and effort. Watch out
+                                for the brief demo in the adjacent video 😊😎😊
+                            </p>
+
+                            <a
+                                class="project-link"
+                                href="https://drive.google.com/file/d/1OMJ1PwnQK1Rfw1fpc449o3jjmL0Tb86X/view?usp=drive_link"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                View Project / Demo ↗
+                            </a>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- ==========================================
+                         PROJECT 2: INTERACTIVE RETAIL DASHBOARD
+                         ========================================== -->
+
+                    <article class="older-project-card">
+
+                        <img
+                            class="older-project-image"
+                            src="images/older-projects/Interactive Dashboard.webp"
+                            alt="Interactive dashboard for a mid-size retail shop"
+                            loading="lazy"
+                        >
+
+                        <div class="older-project-details">
+
+                            <h2>Interactive Dashboard Of A Mid-Size Retail Shop</h2>
+
+                            <p>
+                                There are a lot of small and mid-size grocery
+                                or kirana shops in my locality. I approached
+                                one of them that had been using an older
+                                version of MS Excel.
+                            </p>
+
+                            <p>
+                                I understood how they envisioned their sales
+                                reporting and came up with an interactive
+                                dashboard based on daily transactions they
+                                captured in their Excel files 😊😎😊
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- ==========================================
+                         PROJECT 3: BLOOD PRESSURE TRACKER
+                         ========================================== -->
+
+                    <article class="older-project-card">
+
+                        <img
+                            class="older-project-image"
+                            src="images/older-projects/Blood Pressure Tracker.webp"
+                            alt="Blood pressure tracking and analysis project"
+                            loading="lazy"
+                        >
+
+                        <div class="older-project-details">
+
+                            <h2>Blood Pressure Tracker</h2>
+
+                            <p>
+                                One of my engineering batchmates became my
+                                first client. He was not proficient in
+                                Excel or Google Sheets. His elderly mother
+                                suffers from hypertension, due to which
+                                her blood pressure changes rapidly.
+                            </p>
+
+                            <p>
+                                One useful approach was to track her blood
+                                pressure. After several conversations, he
+                                agreed to enter her readings almost daily.
+                            </p>
+
+                            <p>
+                                I developed a pivot chart on the captured
+                                data to identify the peak systolic rate
+                                of the day. This data analysis helped him
+                                review the readings when discussing
+                                medication decisions with the appropriate
+                                healthcare professional 😊😎😊
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- ==========================================
+                         PROJECT 4: EMPLOYEE LEAVE TRACKER
+                         ========================================== -->
+
+                    <article class="older-project-card">
+
+                        <img
+                            class="older-project-image"
+                            src="images/older-projects/EmployeeLeaves.webp"
+                            alt="Employee leave tracker for a small business"
+                            loading="lazy"
+                        >
+
+                        <div class="older-project-details">
+
+                            <h2>Employee Leave Tracker</h2>
+
+                            <p>
+                                The owner of a small business could not
+                                afford to spend money on expensive CRM tools.
+                                He uses MS Excel and Google Sheets for most
+                                of his work.
+                            </p>
+
+                            <p>
+                                He has around 10 to 15 employees who work
+                                and take leaves on a roster basis. It was
+                                nice to interact with him and come up with
+                                an employee leave tracker 😊😎😊
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- ==========================================
+                         PROJECT 5: PDF TO EXCEL CONVERSION
+                         ========================================== -->
+
+                    <article class="older-project-card">
+
+                        <!--
+                        <img
+                            class="older-project-image"
+                            src="images/older-projects/employee-leave-tracker-2.png"
+                            alt="Additional view of the employee leave tracker project"
+                            loading="lazy"
+                        >
+                        -->
+
+                        <div class="older-project-details">
+
+                            <h2>PDF To Excel Conversion</h2>
+
+                            <p>
+                                The client receives pdf files on a weekly basis,
+                                however, they are better analyzed in an excel format.
+                            </p>
+
+                            <p>
+                                Converting pdf to excel then becomes a task of paramount importance.
+                                Here are the sample of the files which were changed as part of this project.
+                                All the real time client data have been replaced by dummy data.😊😎😊
+                            </p>
+
+                            <a
+                                class="project-link"
+                                href="https://drive.google.com/drive/folders/1HEzUgwwoSV_3_ZLmH9lWwXXNMe5nSITj?usp=drive_link"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                View Project Folder ↗
+                            </a>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- ==========================================
+                         PROJECT 6: SALES AMOUNT DASHBOARD USING POWER BI
+                         ========================================== -->
+
+                    <article class="older-project-card">
+
+                        <img
+                            class="older-project-image"
+                            src="images/older-projects/PowerBIDashBoard.webp"
+                            alt="Sales amount dashboard developed using Power BI"
+                            loading="lazy"
+                        >
+
+                        <div class="older-project-details">
+
+                            <h2>Sales Amount Dashboard Using Power BI</h2>
+
+                            <p>
+                                A real estate promoter wanted to create a
+                                dashboard using Power BI for visualization.
+                                This was achieved by using Decomposition Tree,
+                                Waterfall charts and cards to describe the
+                                KPIs based on dummy data provided by the
+                                client ☺🙂😎🙂🤗
+                            </p>
+
+                            <!--
+                            <a
+                                class="project-link"
+                                href="YOUR_GOOGLE_DRIVE_LINK_FOR_PROJECT_6"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                View Project on Google Drive ↗
+                            </a>
+                            -->
+
+                        </div>
+
+                    </article>
+
+
+                </div>
+
+
+                <!-- ==============================
+                     PAGE NOTE
+                     ============================== -->
+
+                <div class="older-projects-note">
+
+                    Some project materials may use sample or dummy data.
+                    Replace the placeholder image paths with your actual
+                    image filenames and update the Google Drive links
+                    before publishing this page.
+
+                </div>
+
+
+                <!-- ==============================
+                     BACK TO PORTFOLIO
+                     ============================== -->
+
+                <div class="older-projects-back">
+
+                    <a href="index.html" class="button">
+                        Back to Portfolio
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ==============================
+         FOOTER
+         ============================== -->
+
+    <footer>
+
+        <div class="container">
+
+            <p>
+                © Anirban Chowdhury |
+                <a href="#top">Back To Top</a>
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- Connect JavaScript -->
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>

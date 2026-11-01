@@ -1,0 +1,489 @@
+<webpDOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn about Anirban Chowdhury's journey from enterprise IT and Excel reporting to data analytics.">
+    <title>About Me | Anirban Chowdhury</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .about-hero {
+            padding: 68px 0 36px;
+            text-align: center;
+        }
+        .about-eyebrow {
+            color: #70a7ff;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+        .about-hero h1 {
+            color: #70a7ff;
+            font-size: clamp(36px, 5vw, 54px);
+            line-height: 1.15;
+            margin-bottom: 18px;
+        }
+        .about-hero h1 span {
+            color: #70a7ff;
+        }
+        .about-intro {
+            max-width: 780px;
+            margin: 0 auto;
+            color: #b5c4df;
+            font-size: 19px;
+            line-height: 1.8;
+        }
+        .about-content {
+            padding: 24px 0 76px;
+        }
+        .about-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 28px;
+            align-items: start;
+        }
+        .about-story {
+            background: #121a2e;
+            border: 1px solid #26324d;
+            border-radius: 16px;
+            padding: clamp(24px, 4vw, 42px);
+        }
+        .about-story p {
+            color: #c2cde1;
+            font-size: 16px;
+            line-height: 1.9;
+            margin: 0 0 22px;
+        }
+        .about-story p:last-child {
+            margin-bottom: 0;
+        }
+        .about-story strong {
+            color: #eef3ff;
+        }
+        .about-closing {
+            margin-top: 24px;
+            padding: 26px;
+            border-left: 4px solid #70a7ff;
+            border-radius: 0 12px 12px 0;
+            background: #16223a;
+            color: #eef3ff;
+            font-size: clamp(19px, 2.5vw, 24px);
+            font-weight: 700;
+            line-height: 1.6;
+        }
+        .about-back {
+            margin-top: 28px;
+            text-align: center;
+        }
+
+        /* CORPORATE TRAININGS CAROUSEL */
+        .corporate-training {
+            margin-top: 32px;
+            padding: 28px;
+            background: #16223a;
+            border: 1px solid #30466b;
+            border-radius: 14px;
+        }
+        .corporate-training h2 {
+            color: #70a7ff;
+            font-size: clamp(23px, 3vw, 30px);
+            line-height: 1.3;
+            margin: 0 0 10px;
+        }
+        .corporate-training > p {
+            color: #c2cde1;
+            font-size: 15px;
+            line-height: 1.7;
+            margin: 0 0 20px;
+        }
+        .training-carousel {
+            position: relative;
+            width: 100%;
+        }
+        .training-carousel-viewport {
+            overflow: hidden;
+            border-radius: 12px;
+        }
+        .training-carousel-track {
+            display: flex;
+            transition: transform 0.35s ease;
+            will-change: transform;
+        }
+        .training-slide {
+            flex: 0 0 100%;
+            min-width: 0;
+            box-sizing: border-box;
+            padding: 4px;
+        }
+        .training-slide a {
+            display: block;
+            color: #c5d7ff;
+            text-decoration: none;
+        }
+        .training-slide img {
+            display: block;
+            width: 100%;
+            height: clamp(200px, 42vw, 430px);
+            object-fit: contain;
+            background: #0b1020;
+            border: 1px solid #30466b;
+            border-radius: 10px;
+        }
+        .training-slide-title {
+            display: block;
+            margin-top: 12px;
+            color: #eef3ff;
+            font-size: 15px;
+            font-weight: 700;
+            line-height: 1.5;
+        }
+        .training-slide-description {
+            display: block;
+            margin-top: 4px;
+            color: #9dbef7;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        .training-carousel-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 18px;
+        }
+        .training-carousel-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border: 1px solid #30466b;
+            border-radius: 50%;
+            background: #1b2b4b;
+            color: #eef3ff;
+            font-size: 22px;
+            cursor: pointer;
+            transition: background 0.2s ease, border-color 0.2s ease;
+        }
+        .training-carousel-button:hover:not(:disabled) {
+            background: #20365e;
+            border-color: #70a7ff;
+        }
+        .training-carousel-button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        .training-carousel-counter {
+            color: #c2cde1;
+            font-size: 13px;
+            min-width: 65px;
+            text-align: center;
+        }
+        .training-carousel-dots {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 14px;
+        }
+        .training-carousel-dot {
+            width: 9px;
+            height: 9px;
+            padding: 0;
+            border: none;
+            border-radius: 50%;
+            background: #52627e;
+            cursor: pointer;
+        }
+        .training-carousel-dot[aria-current="true"] {
+            background: #70a7ff;
+            transform: scale(1.2);
+        }
+        @media (max-width: 520px) {
+            .about-hero {
+                padding-top: 48px;
+            }
+            .corporate-training {
+                padding: 18px;
+            }
+            .training-slide img {
+                height: 220px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav">
+            <div class="logo"><a href="index.html">Anirban Chowdhury</a></div>
+            <ul class="nav-links">
+                <li><a href="index.html#projects">MyProjects</a></li>
+                <li><a href="older-projects.html">Older Projects</a> </li>
+                <li><a href="Blog.html" aria-current="page">Blog</a></li>
+                <li><a href="About Me.html" aria-current="page">AboutMe</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <section class="about-hero">
+            <div class="container">
+                <!-- <p class="about-eyebrow">My Journey</p> -->
+                <h1>About <span>Me</span></h1>
+            </div>
+        </section>
+
+        <section class="about-content">
+            <div class="container">
+                <div class="about-layout">
+                    <article class="about-story">
+                        <p>My journey in technology began more than two decades ago as a Mainframe Developer. During my corporate career, I worked extensively with COBOL and Excel, using Excel to create detailed data reports that complemented COBOL-generated reports. I later transitioned into Quality Assurance, which further strengthened my attention to detail, analytical thinking, and structured approach to problem-solving.</p>
+
+                        <p>After nearly a decade in the corporate world, I stepped away from my high-paying job due to health and personal circumstances and embarked on a different professional journey. I trained as a yoga instructor and joined a technology startup, where I conducted online classes and consulted with clients. Alongside these responsibilities, I regularly maintained dashboards, tracked targets, and managed accounts and operational information using Google Sheets. Over time, I discovered that working with data was more than just a practical necessity—it was an area I genuinely wanted to explore.</p>
+
+                        <p>When the COVID-19 pandemic brought another turning point in my career, I began taking freelancing more seriously. I earned the <strong>Microsoft Office Specialist: Excel Associate</strong> certification and started conducting online training in Microsoft Excel and Google Sheets. I have delivered approximately three corporate training sessions and trained more than 15 individuals through one-to-one online sessions. I have also developed interactive dashboards in Excel and Google Sheets, helping transform raw information into structured reports and meaningful visual insights.</p>
+
+                        <p>Today, I am expanding my focus towards data analytics across different business domains. I believe that effective analysis begins with understanding the business problem, the domain, and its underlying business rules. A dashboard is not simply a collection of charts and numbers; it should communicate what is happening, why it matters, and where attention may be needed. This understanding guides my approach to designing reports and interactive dashboards.</p>
+
+                        <p>I also explore AI-assisted coding to support my dashboard development and analytical workflows. For me, AI is a means of improving productivity and exploring new possibilities, while sound logic, validation, and an understanding of the underlying requirements remain essential.</p>
+
+                        <p>My professional journey has taught me to adapt, keep learning, and approach unfamiliar challenges with curiosity. I bring together my experience in enterprise IT, my practical knowledge of Excel and Google Sheets, my quality-focused mindset, and my growing expertise in data analytics to build solutions that are useful, understandable, and aligned with business needs.</p>
+
+                        <!-- CORPORATE TRAININGS SECTION -->
+                        <section class="corporate-training" aria-labelledby="corporate-training-heading">
+                            <h2 id="corporate-training-heading">Corporate Trainings</h2>
+                            <p>Explore my corporate training sessions and related materials.</p>
+
+                            <div class="training-carousel" id="trainingCarousel">
+                                <div class="training-carousel-viewport">
+                                    <div class="training-carousel-track" id="trainingCarouselTrack">
+
+                                        <!-- Training slide 1: Replace the image path and link with your own. -->
+                                        <div class="training-slide">
+                                            <a 
+                                               target="_blank"
+                                               rel="noopener noreferrer">
+                                                <img src="images/corporatetraining-casourel/CenturyPly.webp"
+                                                     alt="Corporate training session at CenturyPly"
+                                                     loading="lazy">
+                                                <!--<span class="training-slide-title">Corporate Training — Session 1</span>-->
+                                                <span class="training-slide-description">Corporate Training On Google Sheets At Century Ply.</span>
+                                            </a>
+                                        </div>
+
+                                        <!-- Training slide 2: Replace the image path and link with your own. -->
+                                        <div class="training-slide">
+                                            <a 
+                                               target="_blank"
+                                               rel="noopener noreferrer">
+                                                <img src="images/corporatetraining-casourel/Google Sheets Online Training.webp"
+                                                     alt="Corporate training online session with a Kolkata based company"
+                                                     loading="lazy">
+                                                <span class="training-slide-description">Corporate training online session with a Kolkata based company.</span>
+                                            </a>
+                                        </div>
+                                        
+
+                                        <!-- Training slide 3: Replace the image path and link with your own. -->
+                                        <div class="training-slide">
+                                            <a 
+                                               target="_blank"
+                                               rel="noopener noreferrer">
+                                                <img src="images/corporatetraining-casourel/MsExcelClass.webp"
+                                                     alt="One of the individual online training sessions"
+                                                     loading="lazy">
+                                                <span class="training-slide-description">One of the individual online training sessions.</span>
+                                            </a>
+                                        </div>
+
+                                        <!-- Training slide 4: Replace the image path and link with your own. -->
+                                        <div class="training-slide">
+                                            <a 
+                                               target="_blank"
+                                               rel="noopener noreferrer">
+                                                <img src="images/corporatetraining-casourel/PlanetSpark.webp"
+                                                     alt="One of the individual online training sessions"
+                                                     loading="lazy">
+                                                <span class="training-slide-description">One of the individual online training sessions.</span>
+                                            </a>
+                                        </div>
+
+
+
+                                        <!--
+                                        ADD MORE SLIDES HERE WHEN YOU HAVE MORE IMAGES.
+
+                                        Copy this structure for each additional image.
+                                        The carousel automatically counts the slides.
+
+                                        <div class="training-slide">
+                                            <a href="YOUR_TRAINING_LINK"
+                                               target="_blank"
+                                               rel="noopener noreferrer">
+                                                <img src="images/corporate-training/training-3.jpg"
+                                                     alt="Description of training image"
+                                                     loading="lazy">
+                                                <span class="training-slide-title">Corporate Training — Session 3</span>
+                                                <span class="training-slide-description">Brief description of the training.</span>
+                                            </a>
+                                        </div>
+                                        -->
+
+                                    </div>
+                                </div>
+
+                                <div class="training-carousel-controls">
+                                    <button type="button"
+                                            class="training-carousel-button"
+                                            id="trainingPrevious"
+                                            aria-label="Previous training image">
+                                        &#8249;
+                                    </button>
+
+                                    <span class="training-carousel-counter"
+                                          id="trainingCarouselCounter"
+                                          aria-live="polite">1 / 2</span>
+
+                                    <button type="button"
+                                            class="training-carousel-button"
+                                            id="trainingNext"
+                                            aria-label="Next training image">
+                                        &#8250;
+                                    </button>
+                                </div>
+
+                                <div class="training-carousel-dots"
+                                     id="trainingCarouselDots"
+                                     aria-label="Choose training image">
+                                </div>
+                            </div>
+                        </section>
+
+                        <div class="about-closing">My goal is simple: to turn data into clarity, and clarity into better decisions.</div>
+                    </article>
+                </div>
+                <div class="about-back">
+                    <a href="index.html" class="button">Back to Portfolio</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; Anirban Chowdhury</p>
+        </div>
+    </footer>
+
+    <!-- CORPORATE TRAINING CAROUSEL SCRIPT -->
+    <script>
+        (function () {
+            const carousel = document.getElementById("trainingCarousel");
+            const track = document.getElementById("trainingCarouselTrack");
+            const previousButton = document.getElementById("trainingPrevious");
+            const nextButton = document.getElementById("trainingNext");
+            const counter = document.getElementById("trainingCarouselCounter");
+            const dotsContainer = document.getElementById("trainingCarouselDots");
+
+            if (!carousel || !track || !previousButton || !nextButton || !counter || !dotsContainer) {
+                return;
+            }
+
+            let currentIndex = 0;
+
+            function getSlides() {
+                return Array.from(track.querySelectorAll(".training-slide"));
+            }
+
+            function renderDots() {
+                const slides = getSlides();
+                dotsContainer.replaceChildren();
+
+                slides.forEach(function (slide, index) {
+                    const dot = document.createElement("button");
+                    dot.type = "button";
+                    dot.className = "training-carousel-dot";
+                    dot.setAttribute("aria-label", "Show training image " + (index + 1));
+                    dot.setAttribute("aria-current", index === currentIndex ? "true" : "false");
+
+                    dot.addEventListener("click", function () {
+                        currentIndex = index;
+                        updateCarousel();
+                    });
+
+                    dotsContainer.appendChild(dot);
+                });
+            }
+
+            function updateCarousel() {
+                const slides = getSlides();
+                const total = slides.length;
+
+                if (total === 0) {
+                    track.style.transform = "translateX(0)";
+                    counter.textContent = "0 / 0";
+                    previousButton.disabled = true;
+                    nextButton.disabled = true;
+                    dotsContainer.replaceChildren();
+                    return;
+                }
+
+                if (currentIndex >= total) {
+                    currentIndex = total - 1;
+                }
+
+                if (currentIndex < 0) {
+                    currentIndex = 0;
+                }
+
+                track.style.transform = "translateX(-" + (currentIndex * 100) + "%)";
+                counter.textContent = (currentIndex + 1) + " / " + total;
+                previousButton.disabled = currentIndex === 0;
+                nextButton.disabled = currentIndex === total - 1;
+
+                Array.from(dotsContainer.children).forEach(function (dot, index) {
+                    dot.setAttribute("aria-current", index === currentIndex ? "true" : "false");
+                });
+            }
+
+            previousButton.addEventListener("click", function () {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    updateCarousel();
+                }
+            });
+
+            nextButton.addEventListener("click", function () {
+                const total = getSlides().length;
+
+                if (currentIndex < total - 1) {
+                    currentIndex++;
+                    updateCarousel();
+                }
+            });
+
+            /* Automatically refresh the carousel if more slides are added to the HTML. */
+            const observer = new MutationObserver(function () {
+                const total = getSlides().length;
+
+                if (currentIndex >= total) {
+                    currentIndex = Math.max(0, total - 1);
+                }
+
+                renderDots();
+                updateCarousel();
+            });
+
+            observer.observe(track, {
+                childList: true
+            });
+
+            renderDots();
+            updateCarousel();
+        })();
+    </script>
+</body>
+</html>
